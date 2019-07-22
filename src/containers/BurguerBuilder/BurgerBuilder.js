@@ -79,6 +79,10 @@ class BurgerBuilder extends Component {
       this.setState({purshasing: false})
   }
 
+  purshaseContinueHandler = () => {
+    alert('Continue ')
+  }
+
   render() {
     // Create an inmutable copy of the ingredients
     const disabledInfo = {
@@ -93,7 +97,10 @@ class BurgerBuilder extends Component {
       <Auxiliary>
         <Modal show={this.state.purshasing} modalClosed={this.purshaseCancelHandler}>
           <OrderSummary 
-          ingredients = {this.state.ingredients}/>
+          ingredients = {this.state.ingredients}
+          purshaseContinue = {this.purshaseContinueHandler}
+          purshaseCancel = {this.purshaseCancelHandler}
+          price ={this.state.totalPrice}/>
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
