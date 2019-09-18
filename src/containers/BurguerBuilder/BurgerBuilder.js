@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 // axios instance
 import axios from "../../axios-order";
@@ -36,8 +37,9 @@ class BurgerBuilder extends Component {
       .get("https://react-my-burger-90286.firebaseio.com/ingredients.json")
       .then(response => {
         this.setState({ ingredients: response.data });
-      }).catch((error) => {
-        this.setState({error: true})
+      })
+      .catch(error => {
+        this.setState({ error: true });
       });
   }
 
@@ -107,6 +109,7 @@ class BurgerBuilder extends Component {
       .post("/orders.json", order)
       .then(response => {
         this.setState({ loading: false, purchasing: false });
+        this.props.history.push('/checkout')
       })
       .catch(error => {
         this.setState({ loading: false, purchasing: false });
@@ -123,7 +126,11 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burguer = this.state.error? <p>Ingredients can't be loaded!</p>:<Spinner />;
+    let burguer = this.state.error ? (
+      <p>Ingredients can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
     if (this.state.ingredients) {
       burguer = (
         <React.Fragment>
@@ -164,4 +171,4 @@ class BurgerBuilder extends Component {
     );
   }
 }
-export default withErrorHandler(BurgerBuilder, axios);
+export default withErrorHandler(withRouter(BurgerBuilder), axios);
