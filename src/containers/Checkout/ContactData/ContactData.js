@@ -9,7 +9,9 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from "./ContactData.css";
 import Input from "../../../components/UI/Input/Input";
 
-export default class ContactData extends Component {
+import { connect } from 'react-redux'
+
+class ContactData extends Component {
   state = {
     orderForm: {
       name: {
@@ -219,3 +221,12 @@ export default class ContactData extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ingredients: state.ingredients,
+    price: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ContactData) 
