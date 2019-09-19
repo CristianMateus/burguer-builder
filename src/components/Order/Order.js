@@ -12,9 +12,10 @@ const Order = props => {
     });
   }
 
-  const ingredientOutput = ingredients.map(ingredient => {
+  const ingredientOutput = ingredients.map((ingredient, index) => {
     return (
       <span
+        key={index}
         style={{
           textTransform: "capitalize",
           display: "inline-block",
