@@ -104,7 +104,7 @@ class ContactData extends Component {
     // 2. Set loading state
     this.setState({ loading: true });
     // 3. Build form data object
-    const formData = [];
+    const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       // 3.1 This builds the form data object automatically without the use of push
       //     it gets the key and sets it's value
